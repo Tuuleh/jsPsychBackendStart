@@ -3,13 +3,15 @@
   <head>
     <title>My experiment</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="jsPsych-4.0/jspsych.js"></script>
-    <script src="jsPsych-4.0/plugins/jspsych-text.js"></script>
-    <script src="jsPsych-4.0/plugins/jspsych-single-stim.js"></script>
-    <link href="jsPsych-4.0/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+    <script src="../../jsPsych/jspsych.js"></script>
+    <script src="../../jsPsych/plugins/jspsych-text.js"></script>
+    <script src="../../jsPsych/plugins/jspsych-single-stim.js"></script>
+    <link href="../../jsPsych/css/jspsych.css" rel="stylesheet" type="text/css"></link>
   </head>
+
   <body>
   </body>
+  
   <script>
 
     /* define welcome message block */
@@ -26,9 +28,9 @@
           "press the letter F on the keyboard as fast as you can.</p>" +
           "<p>If the circle is <strong>orange</strong>, do not press " +
           "any key.</p>" +
-          "<div class='left center-content'><img src='static/images/blue.png'></img>" +
+          "<div class='left center-content'><img src='../img/blue.png'></img>" +
           "<p class='small'><strong>Press the F key</strong></p></div>" +
-          "<div class='right center-content'><img src='static/images/orange.png'></img>" +
+          "<div class='right center-content'><img src='../img/orange.png'></img>" +
           "<p class='small'><strong>Do not press a key</strong></p></div>" +
           "<p>Press any key to begin.</p>",
       timing_post_trial: 2000
@@ -38,11 +40,11 @@
 
     var test_stimuli = [
       {
-        image: "img/blue.png",
+        image: "../img/blue.png",
         data: { response: 'go' }
       },
       {
-        image: "img/orange.png",
+        image: "../img/orange.png",
         data: { response: 'no-go' }
       }
     ];
