@@ -102,24 +102,24 @@ You can see that a new directory is also created into your project structure, ca
 
 Add a file called ```app.js``` to the root of your project. This will be the main file for our back end - where we configure our server, our database and the routing (passing of data and requests) for our application. 
 First, we'll install <a href="http://expressjs.com/">Express</a> - a light-weight <a href="http://en.wikipedia.org/wiki/Web_application_framework">web framework</a> for the Node runtime, by typing <code>npm install --save express</code>. Have a look at your package.json file - Express is now written under dependencies and you can see it in the node_modules directory.
-In order to use express, we need to import it into our Node application. In Node, modules are loaded with <code>require</code>, like so:
+In order to use Express, we need to import it into our Node application. In Node, modules are loaded with <code>require</code>, like so:
 ```javascript
 var express = require('express');
 ```
 Write this line into your app.js file. You've now required the previously installed Express framework into your app, and you can access its functionality. Next, we'll create the application and a server - in just four lines of code :) 
 
-<code>
+```javascript
 var app = express();
 var server = app.listen(3000, function(){
     console.log("Listening on port %d", server.address().port);
 });
-</code>
+```
 
 The ```express()``` function is a top-level function exported by the express module, which creates an Express application. It has a method to <i>listen</i> on a specified port - in our case, port 3000 - which accepts a <i>callback function</i> as its second argument. A callback function is a function, which gets executed once its parent method or function completes - in this case, starting listening on port 3000. In our callback function, we tell it to log to the console which port we are listening on.
 
 Now, start your service by typing <code>nodemon app.js</code> on the command line - you can also start your app with Node, typing <code>node app.js</code>, but as I wrote earlier, if you use Nodemon, you won't have to manually restart service every time you make a change. Point your browser to http://localhost:3000/ and see what happens.
 
-Right, I'll spoil it for you. It says "Cannot GET /". What happened is that because you tried to access the application, it received a HTTP GET request with the URL "/", and you haven't speficied what to do when that request is received. GET is the most common <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html">HTTP</a> method; it says "give me this resource". Telling the application what to do when it gets a request is called routing, and we'll do that right now for when we receive a GET request at "/".
+Right, I'll spoil it for you. It says "Cannot GET /". What happened is that because you tried to access the application, it received a HTTP GET request with the URL "/", and you haven't speficied what to do when that request is received. GET is the most common <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html">HTTP</a> method; it says "give me this resource". Telling the application what to do when it gets a request is called routing, and we'll do that right now for when we receive a GET request at "/":
 
 ```javascript
 app.get('/', function(request, response) {
@@ -127,7 +127,7 @@ app.get('/', function(request, response) {
 });
 ```
 
-Now we send back a string as a response, reading "Hello, Express!" - this will get printed out now if the service is restarted and the browser is again pointed at http://localhost:3000. But what happens if you point at http://localhost:3000/experiment? The server receives a HTTP GET request with the URL "/experiment" and it cannot handle it - because we haven't told it what to do! 
+Now whenever we get a GET request to "/", we send back a string as a response, reading "Hello, Express!" - this will get printed out onto the window if the service is restarted and the browser is again pointed at http://localhost:3000. But what happens if you point at http://localhost:3000/experiment? The server receives a HTTP GET request with the URL "/experiment" and it cannot handle it - because we haven't told it what to do. 
 
 ###Serving your experiment
 
@@ -174,7 +174,7 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 ```
 
-Now, let's make the informed consent. In your /public/views/ directory, make a file called index.html and create your informed consent. You can also add some styling - put your stylesheet in /public/css/ and link to it in your .html file. If you're completely out of inspiration, you can ~copy~ plagiarize my index.html and its associated stylesheet in the GitHub repository for the <a href="https://github.com/Tuuleh/jsPsychBackendDemo">tutorial demo</a>. Below the consent text inside the <body> tag, add this button element:
+Now, let's make the informed consent. In your /public/views/ directory, make a file called index.html and create your informed consent. You can also add some styling - put your stylesheet in /public/css/ and link to it in your .html file. If you're completely out of inspiration, you can ~~copy~~ plagiarize my index.html and its associated stylesheet in the GitHub repository for the <a href="https://github.com/Tuuleh/jsPsychBackendDemo">tutorial demo</a>. Below the consent text inside the <body> tag, add this button element:
 
 
 ```html
@@ -228,7 +228,7 @@ Your application is now running locally, but you're still only printing out the 
 The first thing to do is to <a href="http://docs.mongodb.org/manual/installation/">set up MongoDB locally</a>. Once you have it set up, go to the console and enter the Mongo shell by typing <code>mongo</code>. You can view databases that are available to you by issuing <code>show databases</code>. You can access an existing database or create a new one with the <code>use</code> expression. We'll create a local database called jspsych:
 <code>use jspsych</code>.
 
-Once you're in the database, you can view its contents by typing <code>show collections</code>. Since the database is empty, Mongo will not respond with anything in particular. Let's add an entry and re-issue the command to show collections:
+Once you're in the database, you can view its contents by typing <code>show collections</code>. Since the database is empty, Mongo will not respond with anything in particular. Let's add an a collection called 'fruit_shop' with a few documents, and re-issue the command to show collections:
 ```
 db.fruit_shop.insert([{item:'banana', quantity:15, price: '0.25'}, {item:'orange', quantity:8, price :'0.35'}, {item:'apple', quantity: 25, price:'0.12'}])
 ```
@@ -283,18 +283,26 @@ The reason I'm illustrating how the data is laid out in the DB is so you'll have
 }
 ```
 MongoDB simply works as a data storage, where every participant has their own document, containing their data and object id. Now that this has been established, let's look at how to remove elements from the collection:
+
 <code>
 db.fruit_shop.remove({"item":"banana"})
 </code>
-Our fruit shop is now out of bananas. You can see this by issuing <code>db.fruit_shop.find()</code>. But how about we stop with this fruit vendor business altogether and first look at how to empty our inventory:
+
+Our fruit shop is now out of bananas. You can see this by issuing <code>db.fruit_shop.find()</code>. But how about we stop with this fruit vendor business altogether and first look at how to empty our inventory
+
 <code>
 db.fruit_shop.remove({})
 </code>
+
 ...and then how to delete the entire fruit_shop collection so we can instead populate the database with something more useful:
+
 <code>
 db.fruit_shop.drop()
 </code>
+
 Be very careful when dropping <i>anything</i>! You will not be able to recover the lost data. Let's exit the shell - we don't need to do anything more than this with our MongoDB instance for now. Let's instead go to our go_no_go.html file and figure out what we need to change in order to send data to our back end (our Node application in app.js) instead of displaying it on the screen at the end of the experiment. 
+
+###An AJAX call in the on_finish callback
 
 The section you should be looking at is this one, where you start the experiment:
 ```javascript
@@ -430,7 +438,7 @@ To get started with deploying your own project, go to the root of your project f
 
 <code>web: node app.js</code>.
 
-Next, we specified that we want our server to listen on port 3000. Heroku will not necessarily have the application running on port 3000, so we'll need to find out the port from the process environment and use that value instead. In Node, you can access Heroku configuration variables with process.env. So in order to find out the port, we use process.env.PORT: 
+Next, we specified that we want our server to listen on port 3000. Heroku will not necessarily have the application running on port 3000, so we'll need to find out the port from the process environment and use that value instead. In Node, you can access Heroku configuration variables with ```process.env```. So in order to find out the port, we use ```process.env.PORT```: 
 
 ```javascript
 var server = app.listen(process.env.PORT, function(){
@@ -443,8 +451,10 @@ Next, go to <a href = "https://mongolab.com">MongoLab</a>, to the database you s
 <img src="http://i.imgur.com/Kxi68ya.png"/> 
 
 We want this connection string to be accessible to Heroku, but we want to hide it from our public Git repository. We'll use Heroku's config variables for this purpose. Go to your terminal and type...
-<code>heroku config:set CONNECTION = <MongoLabs_URI></code>
-... where <MongoLabs_URI> is your URI string - replacing <dbuser> and <dbpassword> with their respective values. Type <code>heroku config</code> again to verify you got it right (there should now be a CONNECTION variable), and then modify your mongoose connection in app.js:
+
+<code>heroku config:set CONNECTION = [MongoLabs_URI]</code>
+
+... where ```[MongoLabs_URI]``` is your URI string - replacing <dbuser> and <dbpassword> with their respective values. Type <code>heroku config</code> again to verify you got it right (there should now be a CONNECTION variable), and then modify your mongoose connection in app.js:
 
 <code>
 mongoose.connect(process.env.CONNECTION);
