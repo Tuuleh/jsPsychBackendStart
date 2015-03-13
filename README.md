@@ -174,7 +174,7 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 ```
 
-Now, let's make the informed consent. In your /public/views/ directory, make a file called index.html and create your informed consent. You can also add some styling - put your stylesheet in /public/css/ and link to it in your .html file. If you're completely out of inspiration, you can ~~copy~~ plagiarize my index.html and its associated stylesheet in the GitHub repository for the <a href="https://github.com/Tuuleh/jsPsychBackendDemo">tutorial demo</a>. Below the consent text inside the <body> tag, add this button element:
+Now, let's make the informed consent. In your /public/views/ directory, make a file called index.html and create your informed consent. You can also add some styling - put your stylesheet in /public/css/ and link to it in your .html file. If you're completely out of inspiration, you can ~~copy~~ plagiarize my index.html and its associated stylesheet in the GitHub repository for the <a href="https://github.com/Tuuleh/jsPsychBackendDemo">tutorial demo</a>. Below the consent text inside the ```<body>``` tag, add this button element:
 
 
 ```html
@@ -288,7 +288,7 @@ MongoDB simply works as a data storage, where every participant has their own do
 db.fruit_shop.remove({"item":"banana"})
 </code>
 
-Our fruit shop is now out of bananas. You can see this by issuing <code>db.fruit_shop.find()</code>. But how about we stop with this fruit vendor business altogether and first look at how to empty our inventory
+Our fruit shop is now out of bananas. You can see this by issuing <code>db.fruit_shop.find()</code>. But how about we stop with this fruit vendor business altogether and first look at how to empty our inventory...
 
 <code>
 db.fruit_shop.remove({})
