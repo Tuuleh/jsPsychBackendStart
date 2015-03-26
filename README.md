@@ -56,7 +56,7 @@ You can see that I have jsPsych in its own folder, and all my static files in a 
 
 ###Centering stimuli
 
-Before starting with the back end, we're going to change the styling in the experiment a little. In most experimental environments, the stimulus is placed aligned onto the center of the screen, both horizontally and vertically. This can be accomplished with nested <div>-elements. The HTML <div> element is a block level element that can be used as a container for other HTML elements. It's used to group block-elements to format them with CSS. You can see that I've specified a new CSS file, experiment.css in the /public/css folder. Add a link to that CSS file in the go_no_go.html-file. Experiment-specific CSS files should be linked under your higher level stylesheets as they can be used to override the elements. Your stylesheet imports should look like this now:
+Before starting with the back end, we're going to change the styling in the experiment a little. In most experimental environments, the stimulus is placed aligned onto the center of the screen, both horizontally and vertically. This can be accomplished with nested div elements. The HTML div element is a block level element that can be used as a container for other HTML elements. It's used to group block-elements to format them with CSS. You can see that I've specified a new CSS file, experiment.css in the /public/css folder. Add a link to that CSS file in the go_no_go.html-file. Experiment-specific CSS files should be linked under your higher level stylesheets as they can be used to override the elements. Your stylesheet imports should look like this now:
 
 ```html
   <link href="../../jsPsych/css/jspsych.css" rel="stylesheet" type="text/css"/>
@@ -86,7 +86,7 @@ jsPsych.init({
 });
 ```
 
-If you're confused by ```$('#jspsych_target')```, don't worry. The $ here is a synonym for jQuery, and # specifies that we're looking for a jQuery element with that id. (this allows to quickly identify the right element in the <a href = "http://www.w3.org/TR/DOM-Level-2-Core/introduction.html">DOM</a>). You can read more about jQuery <a href = "http://jquery.com/">here</a>. 
+If you're confused by ```$('#jspsych_target')```, don't worry. The $ here is a synonym for jQuery, and # specifies that we're looking for a jQuery element with that id. This allows to quickly identify the right element in the <a href = "http://www.w3.org/TR/DOM-Level-2-Core/introduction.html">DOM</a>. You can read more about jQuery <a href = "http://jquery.com/">here</a>. 
 
 ##2. Setting up Node.js and serving your experiment locally
 
