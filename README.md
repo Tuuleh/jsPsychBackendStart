@@ -38,7 +38,7 @@ You'll need the following ingredients for your secret sauce (we'll install them 
     </li>
 </ol>
 
-##Track
+## Track
 
 1. Aligning stimuli in the center of the screen, and viewing the experiment in your browser
 2. Setting up Node.js and serving your experiment locally
@@ -46,7 +46,7 @@ You'll need the following ingredients for your secret sauce (we'll install them 
 4. Setting up remote accounts, deploying to Heroku
 
 
-##1. Horizontal and vertical aligntment, and viewing the file in your browser
+## 1. Horizontal and vertical aligntment, and viewing the file in your browser
 
 You should get started by <a href="http://www.jspsych.org">downloading jsPsych</a> and doing the <a href="http://docs.jspsych.org/tutorials/hello-world/">Hello World</a> and <a href="http://docs.jspsych.org/tutorials/go-nogo-task/">go/no-go tutorials</a>. It'll be simplest to follow this tutorial if you clone this repository. If you get stuck at any point, you can peek at the finished solution <a href= "https://github.com/Tuuleh/jsPsychBackendDemo">here</a>. 
 
@@ -54,7 +54,7 @@ I'll take off from a point where you have created your experiment. You can view 
 
 You can see that I have jsPsych in its own folder, and all my static files in a folder called public, nested into their respective folders. The folder called 'views' is reserved for my html files, such as the experiments, an informed consent, a finish page... This is some pretty minimal structure and works to demonstrate that you should have a clear, modular structure for your project. This makes the project easy to read and allows you to change one part of your project without breaking its other parts. But note that if you do change the structure of your project, you will have to change paths accordingly! For example, the <img> tags in my instructions may have a different source path than yours, because my images are in the /public/img/ folder. 
 
-###Centering stimuli
+### Centering stimuli
 
 Before starting with the back end, we're going to change the styling in the experiment a little. In most experimental environments, the stimulus is placed aligned onto the center of the screen, both horizontally and vertically. This can be accomplished with nested div elements. The HTML div element is a block level element that can be used as a container for other HTML elements. It's used to group block-elements to format them with CSS. You can see that I've specified a new CSS file, experiment.css in the /public/css folder. Add a link to that CSS file in the go_no_go.html-file. Experiment-specific CSS files should be linked under your higher level stylesheets as they can be used to override the elements. Your stylesheet imports should look like this now:
 
@@ -88,7 +88,7 @@ jsPsych.init({
 
 If you're confused by ```$('#jspsych_target')```, don't worry. The $ here is a synonym for jQuery, and # specifies that we're looking for a jQuery element with that id. This allows to quickly identify the right element in the <a href = "http://www.w3.org/TR/DOM-Level-2-Core/introduction.html">DOM</a>. You can read more about jQuery <a href = "http://jquery.com/">here</a>. 
 
-##2. Setting up Node.js and serving your experiment locally
+## 2. Setting up Node.js and serving your experiment locally
 
 To serve your experiment locally, the first thing you need to do is to <a href="http://nodejs.org/"> install Node.js</a> and its package manager, <a href = "https://www.npmjs.com/">NPM</a>, which you don't need to get separately since it's a part of the Node installation. 
 
@@ -129,7 +129,7 @@ app.get('/', function(request, response) {
 
 Now whenever we get a GET request to "/", we send back a string as a response, reading "Hello, Express!" - this will get printed out onto the window if the service is restarted and the browser is again pointed at http://localhost:3000. But what happens if you point at http://localhost:3000/experiment? The server receives a HTTP GET request with the URL "/experiment" and it cannot handle it - because we haven't told it what to do. 
 
-###Serving your experiment
+### Serving your experiment
 
 Here's what we'll do. When we get the default "/" request, we want to serve a page with an informed consent. The informed consent will have a button, which - when we click it and accept the terms of participation - will <i>redirect</i> the user to the go/no go experiment. In order to render a html page as a response to a GET request, we need to modify the callback function we have specified in app.get('/'), like so:
 
@@ -219,11 +219,11 @@ var server = app.listen(process.env.PORT, function(){
 Congrats! You now have a functional Node.js application.
 
 
-##3. Database configuration - getting started with MongoDB and Mongoose
+## 3. Database configuration - getting started with MongoDB and Mongoose
 
 Your application is now running locally, but you're still only printing out the data on the screen at the end of the experiment instead of using a persistent storage solution. We're going to alter the experiment so that it pipes the data into a <a href = "http://www.mongodb.org/">MongoDB<a/> database. MongoDB is a document database, which serves well as data storage solution to our problem, because our use is extremely simple: we run the experiment, post the entire jsPsych output JSON object into the database, and just access it later for analysis. If your experimental battery is more complex (e.g. requires validation or has several tasks), I'd recommend using a relational database with an ORM instead. I've used <a href="http://sequelize.readthedocs.org/en/latest/">Sequelize</a> between a Node-based jsPsych experiment and a MySQL database before, and while it does take more setting up, it pays off for more complicated use cases. You can also use it for Postgres.
 
-###MongoDB
+### MongoDB
 
 The first thing to do is to <a href="http://docs.mongodb.org/manual/installation/">set up MongoDB locally</a>. Once you have it set up, go to the console and enter the Mongo shell by typing <code>mongo</code>. You can view databases that are available to you by issuing <code>show databases</code>. You can access an existing database or create a new one with the <code>use</code> expression. We'll create a local database called jspsych:
 <code>use jspsych</code>.
@@ -302,7 +302,7 @@ db.fruit_shop.drop()
 
 Be very careful when dropping <i>anything</i>! You will not be able to recover the lost data. Let's exit the shell - we don't need to do anything more than this with our MongoDB instance for now. Let's instead go to our go_no_go.html file and figure out what we need to change in order to send data to our back end (our Node application in app.js) instead of displaying it on the screen at the end of the experiment. 
 
-###An AJAX call in the on_finish callback
+### An AJAX call in the on_finish callback
 
 The section you should be looking at is this one, where you start the experiment:
 ```javascript
@@ -379,7 +379,7 @@ app.post('/experiment-data', function(request, response) {
 })
 ```
 
-###Mongoose
+### Mongoose
 
 Now we just need to figure out how to pipe it into our MongoDB. Generally, you need to design your database so that it supports your data storage. Usually, this means specifying a <a href="http://stackoverflow.com/questions/2674222/what-is-purpose-of-database-schema">schema</a>. A schema is a description of the organization of data as a blueprint of how a database is constructed. Schemas are important and in fact most database solutions necessarily require for you to specify one. They bring structure and constraints to your database, allow you to set permits etc. However, for the sake of simplicity, we are going to use a schemaless MongoDB instance. This means that we do not specify how the data we enter into the database should look like, what parameters it should have etc, but we will simply use MongoDB like a bucket where we pour our jsPsych output. Mongoose doesn't directly allow you to use a schemaless database, so we'll make a work-around by using an empty schema with the ```strict``` parameter set to ```false```. In your app.js, write your Mongoose configuration above the lines where you set up middleware.
 
@@ -426,7 +426,7 @@ system.indexes
 
 There was a new collection called 'entries'. Searching through it will show you that it contains one entry with two or three parameters: "_id", which is the object ID MongoDB adds, "data", containing the jsPsych data we parsed from the request body, and possibly <a href="http://stackoverflow.com/questions/12495891/what-is-the-v-field-in-mongodb">"__v"</a>, which is a version key parameter added by Mongo, containing the internal revision of the document. You will get a document like this, entered to the 'entries'-collection, for every participant who completes the experiment.
 
-##4. Setting up remote accounts and deploying to Heroku
+## 4. Setting up remote accounts and deploying to Heroku
 
 Awesome, you now have a fully fledged application you can run locally, database configuration and all! Now you only have to take care of a few formalities in order to deploy your application and start sharing the link to recruit participants. 
 
@@ -481,5 +481,5 @@ Now, push your repository both to GitHub and to Heroku:
 
 If you get an application error after deploying, go to your console and issue <code>> heroku logs</code>. Debugging heroku can be a little annoying, but the logs should help you define what the problem is. It's often an iterative process and requires a bit of work. A frequent error with the default go/no-go experiment is that once you progress to the experiment, the page is empty, and you can see on the browser console that the page on heroku was loaded over HTTPS, but it's doing an insecure HTTP request for jQuery - so make sure to correct the jQuery loading script on your experiment .html file into HTTPS instead of HTTP. 
 
-#The end
+# The end
 This is the end of the tutorial. Comments and feedback are welcome at tuuli.pollanen@gmail.com!
