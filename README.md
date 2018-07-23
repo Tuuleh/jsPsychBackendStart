@@ -1,3 +1,6 @@
+### Disclaimer
+Because I've been busy with work and moved away from academics, this tutorial has not been updated for a couple of years. The broad strokes and principles are the same, and I still get email from people saying that it works and is helpful, but quite a few things have changed - obviously there are new versions of many of the dependencies, including JsPsych itself. If you follow this tutorial and decide to deploy something of your own, I'd appreciate if you could submit a PR with updates so we could keep this tutorial up to date.
+
 # Tutorial - How to deploy your jsPsych experiment on Heroku as a Node.js application 
 ## ...or in other words, full stack JavaScript for psychologists
 
@@ -98,7 +101,7 @@ Npm makes installing dependencies very easy. You simply issue <code>npm install<
 
 You can see that a new directory is also created into your project structure, called node_modules. This is a directory that contains all dependencies installed with npm. We don't actually want to push these dependencies onto our remote repository (because everything we need in production will be described in package.json), so we'll add a new file to the root of the folder, named .gitignore - this file should contain all of the contents you wish to hide from your remote repository. For now, the file should contain nothing but the text <code>node_modules</code>, specifying that want to hide your npm-installed Node modules. 
 
-###Hello, Express
+### Hello, Express
 
 Add a file called ```app.js``` to the root of your project. This will be the main file for our back end - where we configure our server, our database and the routing (passing of data and requests) for our application. 
 First, we'll install <a href="http://expressjs.com/">Express</a> - a light-weight <a href="http://en.wikipedia.org/wiki/Web_application_framework">web framework</a> for the Node runtime, by typing <code>npm install --save express</code>. Have a look at your package.json file - Express is now written under dependencies and you can see it in the node_modules directory.
