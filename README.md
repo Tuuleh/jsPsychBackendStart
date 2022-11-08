@@ -13,33 +13,23 @@ I'm working through the tutorial on Ubuntu 14.10. The process should not be very
 
 You'll need the following ingredients for your secret sauce (we'll install them together throughout the tutorial):
 
-<ol>
-    <li>
-        <a href = "http://www.jspsych.org">jsPsych</a> (d'oh!)
-        <p>An open source JavaScript library for web based experiments in behavioral sciences.</p>
-    </li>
 
-    <li>
-        The <a href = "http://nodejs.org/">Node.js</a> runtime environment and its awesome package manager, <a href="https://www.npmjs.com/">NPM</a>
-        <p>Node.js® is built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js represents the flesh and bones on top of which we build the back end for our experiment. <a href = "http://expressjs.com/">Express</a> is a web framework for Node.js, and we'll be using <a href="http://mongoosejs.com/">Mongoose </a>- a MongoDB driver for Node.js.</p>
-    </li>
 
-    <li>
-      <a href = "http://www.mongodb.org/" >MongoDB</a>
-      <p>MongoDB is a cross-platform document-oriented NoSQL database. It will work as the storage for the data we get out of jsPsych. If you're interested, you could learn more about <a href = "https://www.youtube.com/watch?v=qI_g07C_Q5I">NoSQL</a> databases, <a href = "http://en.wikipedia.org/wiki/Relational_database">relational databases</a> or <a href = "http://json.org/">JSON</a>, since that's the format we're getting out of jsPsych. Or you could also not learn about any of those and still be able to complete this tutorial, but you will be none the smarter.</p>
-      <p>For more advanced readers - I personally recommend using an <a href="http://en.wikipedia.org/wiki/Object-relational_mapping">ORM</a> between jsPsych and a relational database, as your experimental data can be aggregated in a way that is well suited for a relational DB. I like to make a table for each experiment, passing an identifier I use as a foreign key for the participant every time I make a request for a new page. If you use the relational approach and/or store data between tasks, you'll need to take care of some validation (making sure the participant doesn't repeat the same task several times, that there aren't several entries for the same ID etc), but the partial data gained from storing between the tasks affords you some valuable insight into performance and characteristics of participants who dropped out. </p>
-    </li>
+* [JsPsych](http://www.jspsych.org) - An open source JavaScript library for web based experiments in behavioral sciences.
 
-    <li>
-      <a href = "https://dashboard.heroku.com/">Heroku</a> 
-      <p>Heroku is a <a href = "http://en.wikipedia.org/wiki/Platform_as_a_service">platform as a service (PaaS)</a> that enables developers to build and run applications in the cloud. Heroku has a free tier that suits our needs and offers support for Node.js, so we are going to deploy our application to Heroku - this way, the entire experiment will be contained on the cloud and we do not need to worry about a web server - huzzah!</p>
-    </li>
+* [Node.js](https://nodejs.org) and NPM - A runtime environment and its awesome package manager - Node.js® is built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js represents the flesh and bones on top of which we build the back end for our experiment.
 
-    <li>
-      <a href="http://git-scm.com/">Git</a>
-      <p>Git is a <a href = "http://en.wikipedia.org/wiki/Revision_control">version control</a> tool. In my opinion it's easiest to get started with Git by going to <a href = "https://github.com/">GitHub</a> and doing their Git bootcamp. We will need it to deploy the experiment to Heroku. </p>
-    </li>
-</ol>
+* [Express](https://expressjs.com/) - A web framework for Node.js
+
+* [Mongoose](https://mongoosejs.com/) - A MongoDB driver for Node.js
+    
+* [MongoDB](https://www.mongodb.org/) - A cross-platform document-oriented NoSQL database. It will work as the storage for the data we get out of jsPsych. If you're interested, you could learn more about <a href = "https://www.youtube.com/watch?v=qI_g07C_Q5I">NoSQL</a> databases, <a href = "http://en.wikipedia.org/wiki/Relational_database">relational databases</a> or <a href = "http://json.org/">JSON</a>, since that's the format we're getting out of jsPsych. Or you could also not learn about any of those and still be able to complete this tutorial, but you will be none the smarter.
+
+* [ORM](https://en.wikipedia.org/wiki/Object-relational_mapping) - For more advanced readers - I personally recommend using an ORM between jsPsych and a relational database, as your experimental data can be aggregated in a way that is well suited for a relational DB. I like to make a table for each experiment, passing an identifier I use as a foreign key for the participant every time I make a request for a new page. If you use the relational approach and/or store data between tasks, you'll need to take care of some validation (making sure the participant doesn't repeat the same task several times, that there aren't several entries for the same ID etc), but the partial data gained from storing between the tasks affords you some valuable insight into performance and characteristics of participants who dropped out. </p>
+    
+* [Heroku](https://dashboard.heroku.com) - A <a href = "http://en.wikipedia.org/wiki/Platform_as_a_service">platform as a service (PaaS)</a> that enables developers to build and run applications in the cloud. Heroku has a free tier that suits our needs and offers support for Node.js, so we are going to deploy our application to Heroku - this way, the entire experiment will be contained on the cloud and we do not need to worry about a web server - huzzah!</p>
+    
+* [Git](https://https://git-scm.com) - A <a href = "http://en.wikipedia.org/wiki/Revision_control">version control</a> tool. In my opinion it's easiest to get started with Git by going to <a href = "https://github.com/">GitHub</a> and doing their Git bootcamp. We will need it to deploy the experiment to Heroku. 
 
 ## Track
 
@@ -167,7 +157,7 @@ Finally - Express utilizes template engines. A <a href="http://www.simple-is-bet
 EJS is a node module, and so it has to be installed with npm:
 
 <code>
-npm install --save EJS
+npm install --save ejs
 </code>
 
 For the upcoming second part of the tutorial, we will be passing a unique identifier for each participant inside a script tag - this allows us to recognize their data across different tasks in a test battery in the database - and for that purpose, we will eventually use some EJS functionality. But for now, just think of all this as raw HTML, and add this to your app.js:
